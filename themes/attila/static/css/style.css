@@ -2145,3 +2145,9 @@ pre code table tr:hover {
   //border: 1px solid #ccc;
   background-color: #99a;
 }
+
+/* for Jupyter notebooks */
+.cell pre {
+  white-space: pre;
+  font-family: 'Source Code Pro', 'Inconsolata', monospace;
+}
