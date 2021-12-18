@@ -1321,6 +1321,10 @@ img {
     padding-top: 6em
 }
 
+.post-header {
+    margin-bottom: 9px;
+}
+
 #post-header.has-cover {
     padding: 16em 0 2em;
     background: #000;
