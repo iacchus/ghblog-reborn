@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="{{ DEFAULT_LANG }}">
+
+<head>
+  {% block head %}
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  {% if GOOGLE_SITE_VERIFICATION %}
+  <meta name="google-site-verification" content="{{ GOOGLE_SITE_VERIFICATION }}">
+  {% endif %}
+
+  <title>{% block title %}{{ SITENAME }}{% if SITESUBTITLE and SHOW_SITESUBTITLE_IN_HTML %} - {{ SITESUBTITLE }}{% endif %}{% endblock title %}</title>
+
+  {% if SITE_DESCRIPTION %}
+  <meta name="description" content="{{SITE_DESCRIPTION}}" />
+  {% endif %}
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="{{ SITEURL }}" rel="canonical" />
+  <!--<link rel="icon" type="image/svg+xml" href="/favicon.svg">-->
+  <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+
+  <style>a { color: #ffffff; }</style>
+
+  <!-- Feed -->
+  {% for name,link in SOCIAL if name.lower() in ['rss', 'rss-square', 'feed'] %}
+      <link href="{{ link }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Full Atom Feed" />
+  {% else %}
+      {% if FEED_ALL_ATOM %}
+        <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Full Atom Feed" />
+      {% endif %}
+      {% if FEED_ALL_RSS %}
+          <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Full RSS Feed" />
+      {% endif %}
+      {% if FEED_ATOM %}
+          <link href="{{ FEED_DOMAIN }}/{{ FEED_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom Feed" />
+      {% endif %}
+      {% if FEED_RSS %}
+          <link href="{{ FEED_DOMAIN }}/{{ FEED_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
+      {% endif %}
+      {% if CATEGORY_FEED_ATOM and category %}
+          <link href="{{ FEED_DOMAIN }}/{{ CATEGORY_FEED_ATOM|format(slug=category.slug) }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Categories Atom Feed" />
+      {% endif %}
+      {% if CATEGORY_FEED_RSS and category %}
+          <link href="{{ FEED_DOMAIN }}/{{ CATEGORY_FEED_RSS|format(slug=category.slug) }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Categories RSS Feed" />
+      {% endif %}
+      {% if TAG_FEED_ATOM and tag %}
+          <link href="{{ FEED_DOMAIN }}/{{ TAG_FEED_ATOM|format(slug=tag.slug) }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Tags Atom Feed" />
+      {% endif %}
+      {% if TAG_FEED_RSS and tag %}
+          <link href="{{ FEED_DOMAIN }}/{{ TAG_FEED_RSS|format(slug=tag.slug) }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Tags RSS Feed" />
+      {% endif %}
+  {% endfor %}
+
+  <link href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/highlightjs-org-styles/sunburst.min.css" type="text/css" rel="stylesheet" />
+  <!--<link href="{{ THEME_STATIC_DIR }}/css/highlightjs-org-styles/sunburst.css" type="text/css" rel="stylesheet" />-->
+  <link href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/nerd-fonts-generated.css" type="text/css" rel="stylesheet" />
+  <!--<link href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/jupyter-custom.css" type="text/css" rel="stylesheet" />-->
+
+  <link rel="stylesheet" href="https://rawgit.com/iacchus/jquery-oembed-all/master/jquery.oembed.css"  />
+  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/css/basic/emojify.min.css" />-->
+
+  <link href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/style.css" type="text/css" rel="stylesheet" />
+  <link href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/iacchus-sidebar.css" type="text/css" rel="stylesheet" />
+      <!--<link href="{{ THEME_STATIC_DIR }}/css/style.css" type="text/css" rel="stylesheet" />->
+
+  {% if CSS_OVERRIDE %}
+    <!-- CSS specified by the user -->
+    {% for css in CSS_OVERRIDE %}
+    <link href="{{ SITEURL }}/{{ css }}" type="text/css" rel="stylesheet" />
+    {% endfor %}
+  {% endif %}
+
+  <!--<script defer src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/fontawesome-all.min.js"></script>-->
+
+  <!-- Custom fonts -->
+  <!--<link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />-->
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  {% endblock head %}
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+  {% include 'partials/navigation.html' %}
+
+  {% block header %}{% endblock header %}
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+      {% block content %}{% endblock content %}
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class="{{body_class}}"></div>
+  
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+          <span class="credits-theme">Theme <a href="https://iacchus.github.io" rel="nofollow">NiVoL4bS</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/highlight.min.js"></script>
+  <script type="text/javascript" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/highlightjs-line-numbers.min.js"></script>
+  <script type="text/javascript" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/script.js"></script>
+  <script src="https://cdn.rawgit.com/iacchus/abcjs/master/bin/abcjs_plugin_3.1.2-hotfix-min.js"></script>
+
+  <script src="https://rawgit.com/iacchus/jquery-oembed-all/master/jquery.oembed.js"></script>
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/js/emojify.min.js"></script>-->
+
+  <script type="text/javascript" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/giscus.js"></script>
+  <script type="text/javascript" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/emojify.min.js"></script>
+  <script type="text/javascript" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/mercurius.js"></script>
+  <script type="text/javascript" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/index.js"></script>
+  {% if article %}
+    <!--<script src="https://giscus.app/client.js"
+            data-repo="iacchus/iacchus.github.io-comments"
+            data-repo-id="MDEwOlJlcG9zaXRvcnkzNzcxMTIzMzc="
+            data-category="General"
+            data-category-id="MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMzMDI2OTg0"
+            data-mapping="og:title"
+            data-reactions-enabled="0"
+            data-theme="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/giscus.css"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <div class="giscus"></div>-->
+
+    <!--<script type="text/javascript" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/iacchus-sidebar.js"></script>-->
+  {% endif %} <!-- if article-->
+  {% if JS_OVERRIDE %}
+    <!-- Script specified by the user -->
+    {% for js in JS_OVERRIDE %}
+    <script type="text/javascript"  src="{{ SITEURL }}/{{ js }}"></script>
+    {% endfor %}
+  {% endif %}
+  {% include 'partials/analytics.js' %}
+
+  <!--<div id="graphcomment"></div>
+<script type="text/javascript">
+  /* - - - CONFIGURATION VARIABLES - - - */
+
+  var __semio__params = {
+    graphcommentId: "COMPUTER-CULTURE", // make sure the id is yours
+
+    behaviour: {
+      // HIGHLY RECOMMENDED
+        uid: 'computer-culture', // uniq identifer for the comments thread on your page (ex: your page id)
+    },
+
+    // configure your variables here
+
+  }
+
+  /* - - - DON'T EDIT BELOW THIS LINE - - - */
+
+  function __semio__onload() {
+    __semio__gc_graphlogin(__semio__params)
+  }
+
+
+  (function() {
+    var gc = document.createElement('script'); gc.type = 'text/javascript'; gc.async = true;
+    gc.onload = __semio__onload; gc.defer = true; gc.src = 'https://devintegration.graphcomment.com/gc_graphlogin.js?' + Date.now();
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(gc);
+  })();
+</script>-->
+
+<!-- https://giscus.app/ -->
+{% if not article %}
+<div class="giscus" style="display: none;"></div>
+{% endif %}
+<script src="https://giscus.app/client.js"
+        data-repo="iacchus/iacchus.github.io-comments"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzNzcxMTIzMzc="
+        data-category="General"
+        data-category-id="MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMzMDI2OTg0"
+        data-mapping="og:title"
+        data-reactions-enabled="0"
+        data-theme="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/giscus.css"
+        data-emit-metadata="1"
+        crossorigin="anonymous"
+        async>
+</script>
+</body>
+</html>
