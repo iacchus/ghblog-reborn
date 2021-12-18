@@ -5,8 +5,10 @@ SITESUBTITLE = 'This is a blog for all things'
 
 PATH = 'content'
 STATIC_PATHS = ['static', 'images'] # this is relative to PATH
+OUTPUT_PATH = 'output/' # also in Makefile
 
 THEME = 'themes/attila'
+
 TIMEZONE = 'America/Sao_Paulo'
 
 DEFAULT_LANG = 'en'
@@ -23,6 +25,7 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
+#SUMMARY_MAX_LENGTH = None
 SHOW_FULL_ARTICLE = True
 
 #MARKUP = ('md', 'ipynb')
