@@ -28,21 +28,23 @@ AUTHOR_FEED_RSS = None
 #SUMMARY_MAX_LENGTH = None
 SHOW_FULL_ARTICLE = True
 
-#MARKUP = ('md', 'ipynb')
-MARKUP = ('md')
-
-IPYNB_MARKUP_USE_FIRST_CELL = True
-
 DISPLAY_PAGES_ON_MENU = True
 
 PLUGIN_PATHS = [
     'plugins'
 ]
 
+from pelican_jupyter import markup as nb_markup
+MARKUP = ('md', 'ipynb')
+#MARKUP = ('md')
+IGNORE_FILES = [".ipynb_checkpoints"]
+IPYNB_MARKUP_USE_FIRST_CELL = True
+
 PLUGINS = [
     #'just_table',
     #'liquid_tags.youtube',
     #'liquid_tags.notebook',
+    nb_markup,
     #'pelican_jupyter.markup',
     #'pelimoji',
     'pin_to_top',
@@ -52,8 +54,6 @@ PLUGINS = [
     'show_source',
     # 'summary',
 ]
-
-IGNORE_FILES = [".ipynb_checkpoints"]
 
 MARKDOWN = {
     'extensions_configs': {
